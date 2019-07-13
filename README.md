@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/zhesha/lexerjs.svg?branch=master)][3]
+![Build Status](https://travis-ci.com/zhesha/lexerjs.svg?branch=master)
 ```
 var tokens = lexer("5+5", [
   {
