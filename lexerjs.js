@@ -36,8 +36,7 @@
         } else if (result == lexerResults.start) {
           ruleIndex = j;
           type = result;
-          //TODO testerStartIndex
-          continue;
+          break;
         } else if (
           result == lexerResults.exect ||
           result == lexerResults.posible ||
