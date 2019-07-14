@@ -31,12 +31,14 @@
       for (var j = testerStartIndex; j < rules.length; j++) {
         var result = rules[j].tester(tested);
         if (result == lexerResults.none) {
-          testerStartIndex++;
+          if (ruleIndex == null) {
+            testerStartIndex++;
+          }
           continue;
         } else if (result == lexerResults.start) {
           ruleIndex = j;
           type = result;
-          break;
+          continue;
         } else if (
           result == lexerResults.exect ||
           result == lexerResults.posible ||

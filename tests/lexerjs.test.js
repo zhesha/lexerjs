@@ -35,76 +35,23 @@ test("arifmetic expretion tokenize successful", function() {
 });
 
 test("variable statement tokenize successful", function() {
-  var tokens = lexer("var var1 = 1;", [
-    {
-      name: "var_kw",
-      tester: function(tested) {
-        if (tested == "v" || tested == "va") {
-          return lexerResults.start;
-        } else if (tested == "var") {
-          return lexerResults.exect;
-        } else {
-          return lexerResults.none;
-        }
-      }
-    },
-    {
-      name: "number",
-      tester: function(tested) {
-        var regResult = tested.match(/\d/);
-        if (regResult && regResult[0] == tested) {
-          return lexerResults.posible;
-        } else {
-          return lexerResults.none;
-        }
-      }
-    },
-    {
-      name: "identifier",
-      tester: function(tested) {
-        var regResult = tested.match(/[a-z1-9]*/);
-        if (regResult && regResult[0] == tested) {
-          return lexerResults.exect;
-        } else {
-          return lexerResults.none;
-        }
-      }
-    },
-    {
-      name: "operator",
-      tester: function(tested) {
-        if (tested == "=") {
-          return lexerResults.exect;
-        } else {
-          return lexerResults.none;
-        }
-      }
-    },
-    {
-      name: "terminator",
-      tester: function(tested) {
-        if (tested == ";") {
-          return lexerResults.exect;
-        } else {
-          return lexerResults.none;
-        }
-      }
-    },
-    {
-      name: "whitespace",
-      tester: function(tested) {
-        if (tested == " ") {
-          return lexerResults.skip;
-        } else {
-          return lexerResults.none;
-        }
-      }
-    }
-  ]);
+  var tokens = lexer("var var1 = 1;", variableStatementRules);
   expect(tokens.length).toBe(5);
   expect(tokens).toEqual([
     { type: "var_kw", value: "var" },
     { type: "identifier", value: "var1" },
+    { type: "operator", value: "=" },
+    { type: "number", value: "1" },
+    { type: "terminator", value: ";" }
+  ]);
+});
+
+test("variable statement if identifier is start of keyword", function() {
+  var tokens = lexer("var va = 1;", variableStatementRules);
+  expect(tokens.length).toBe(5);
+  expect(tokens).toEqual([
+    { type: "var_kw", value: "var" },
+    { type: "identifier", value: "va" },
     { type: "operator", value: "=" },
     { type: "number", value: "1" },
     { type: "terminator", value: ";" }
@@ -403,6 +350,73 @@ var jsonRules = [
       }
 
       return lexerResults.none;
+    }
+  }
+];
+
+var variableStatementRules = [
+  {
+    name: "var_kw",
+    tester: function(tested) {
+      if (tested == "v" || tested == "va") {
+        return lexerResults.start;
+      } else if (tested == "var") {
+        return lexerResults.exect;
+      } else {
+        return lexerResults.none;
+      }
+    }
+  },
+  {
+    name: "number",
+    tester: function(tested) {
+      var regResult = tested.match(/\d/);
+      if (regResult && regResult[0] == tested) {
+        return lexerResults.posible;
+      } else {
+        return lexerResults.none;
+      }
+    }
+  },
+  {
+    name: "identifier",
+    tester: function(tested) {
+      var regResult = tested.match(/[a-z1-9]*/);
+      if (regResult && regResult[0] == tested) {
+        return lexerResults.exect;
+      } else {
+        return lexerResults.none;
+      }
+    }
+  },
+  {
+    name: "operator",
+    tester: function(tested) {
+      if (tested == "=") {
+        return lexerResults.exect;
+      } else {
+        return lexerResults.none;
+      }
+    }
+  },
+  {
+    name: "terminator",
+    tester: function(tested) {
+      if (tested == ";") {
+        return lexerResults.exect;
+      } else {
+        return lexerResults.none;
+      }
+    }
+  },
+  {
+    name: "whitespace",
+    tester: function(tested) {
+      if (tested == " ") {
+        return lexerResults.skip;
+      } else {
+        return lexerResults.none;
+      }
     }
   }
 ];
