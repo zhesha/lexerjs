@@ -9,7 +9,7 @@ test("arifmetic expretion tokenize successful", function() {
       tester: function(tested) {
         var regResult = tested.match(/\d/);
         if (regResult && regResult[0] == tested) {
-          return lexerResults.posible;
+          return lexerResults.possible;
         } else {
           return lexerResults.none;
         }
@@ -19,7 +19,7 @@ test("arifmetic expretion tokenize successful", function() {
       name: "sign",
       tester: function(tested) {
         if (tested == "+") {
-          return lexerResults.exect;
+          return lexerResults.exact;
         } else {
           return lexerResults.none;
         }
@@ -128,7 +128,7 @@ test("unxpected token throws error even if starts same", function() {
         if ("var".startsWith(tested)) {
           return lexerResults.start;
         } else if (tested == "var") {
-          return lexerResults.exect;
+          return lexerResults.exact;
         } else {
           return lexerResults.none;
         }
@@ -148,7 +148,7 @@ test("new line can be handled", function() {
       tester: function(tested) {
         var regResult = tested.match(/\d/);
         if (regResult && regResult[0] == tested) {
-          return lexerResults.posible;
+          return lexerResults.possible;
         } else {
           return lexerResults.none;
         }
@@ -158,7 +158,7 @@ test("new line can be handled", function() {
       name: "sign",
       tester: function(tested) {
         if (tested == "+") {
-          return lexerResults.exect;
+          return lexerResults.exact;
         } else {
           return lexerResults.none;
         }
@@ -191,7 +191,7 @@ test("throws if last token not finished", function() {
         if ("var".startsWith(tested)) {
           return lexerResults.start;
         } else if (tested == "var") {
-          return lexerResults.exect;
+          return lexerResults.exact;
         } else {
           return lexerResults.none;
         }
@@ -235,7 +235,7 @@ var jsonRules = [
     name: "ArrayOpen",
     tester: function(tested) {
       if (tested == "[") {
-        return lexerResults.exect;
+        return lexerResults.exact;
       } else {
         return lexerResults.none;
       }
@@ -245,7 +245,7 @@ var jsonRules = [
     name: "ArrayClose",
     tester: function(tested) {
       if (tested == "]") {
-        return lexerResults.exect;
+        return lexerResults.exact;
       } else {
         return lexerResults.none;
       }
@@ -255,7 +255,7 @@ var jsonRules = [
     name: "ObjectOpen",
     tester: function(tested) {
       if (tested == "{") {
-        return lexerResults.exect;
+        return lexerResults.exact;
       } else {
         return lexerResults.none;
       }
@@ -265,7 +265,7 @@ var jsonRules = [
     name: "ObjectClose",
     tester: function(tested) {
       if (tested == "}") {
-        return lexerResults.exect;
+        return lexerResults.exact;
       } else {
         return lexerResults.none;
       }
@@ -275,7 +275,7 @@ var jsonRules = [
     name: "Colon",
     tester: function(tested) {
       if (tested == ":") {
-        return lexerResults.exect;
+        return lexerResults.exact;
       } else {
         return lexerResults.none;
       }
@@ -285,7 +285,7 @@ var jsonRules = [
     name: "coma",
     tester: function(tested) {
       if (tested == ",") {
-        return lexerResults.exect;
+        return lexerResults.exact;
       } else {
         return lexerResults.none;
       }
@@ -298,7 +298,7 @@ var jsonRules = [
         /-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/
       );
       if (regResult && regResult[0] == tested) {
-        return lexerResults.exect;
+        return lexerResults.exact;
       } else {
         return lexerResults.none;
       }
@@ -308,7 +308,7 @@ var jsonRules = [
     name: "Boolean",
     tester: function(tested) {
       if ("false" == tested || "true" == tested) {
-        return lexerResults.exect;
+        return lexerResults.exact;
       } else if ("false".startsWith(tested) || "true".startsWith(tested)) {
         return lexerResults.start;
       } else {
@@ -320,7 +320,7 @@ var jsonRules = [
     name: "Nil",
     tester: function(tested) {
       if ("null" == tested) {
-        return lexerResults.exect;
+        return lexerResults.exact;
       } else if ("null".startsWith(tested)) {
         return lexerResults.start;
       } else {
@@ -346,7 +346,7 @@ var jsonRules = [
         matches[0] == 0 &&
         matches[1] == tested.length - 1
       ) {
-        return lexerResults.exect;
+        return lexerResults.exact;
       }
 
       return lexerResults.none;
@@ -361,7 +361,7 @@ var variableStatementRules = [
       if (tested == "v" || tested == "va") {
         return lexerResults.start;
       } else if (tested == "var") {
-        return lexerResults.exect;
+        return lexerResults.exact;
       } else {
         return lexerResults.none;
       }
@@ -372,7 +372,7 @@ var variableStatementRules = [
     tester: function(tested) {
       var regResult = tested.match(/\d/);
       if (regResult && regResult[0] == tested) {
-        return lexerResults.posible;
+        return lexerResults.possible;
       } else {
         return lexerResults.none;
       }
@@ -383,7 +383,7 @@ var variableStatementRules = [
     tester: function(tested) {
       var regResult = tested.match(/[a-z1-9]*/);
       if (regResult && regResult[0] == tested) {
-        return lexerResults.exect;
+        return lexerResults.exact;
       } else {
         return lexerResults.none;
       }
@@ -393,7 +393,7 @@ var variableStatementRules = [
     name: "operator",
     tester: function(tested) {
       if (tested == "=") {
-        return lexerResults.exect;
+        return lexerResults.exact;
       } else {
         return lexerResults.none;
       }
@@ -403,7 +403,7 @@ var variableStatementRules = [
     name: "terminator",
     tester: function(tested) {
       if (tested == ";") {
-        return lexerResults.exect;
+        return lexerResults.exact;
       } else {
         return lexerResults.none;
       }

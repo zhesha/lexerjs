@@ -2,8 +2,8 @@
   var lexerResults = {
     none: 0,
     start: 1,
-    exect: 2,
-    posible: 3,
+    exact: 2,
+    possible: 3,
     skip: 4
   };
 
@@ -40,8 +40,8 @@
           type = result;
           continue;
         } else if (
-          result == lexerResults.exect ||
-          result == lexerResults.posible ||
+          result == lexerResults.exact ||
+          result == lexerResults.possible ||
           result == lexerResults.skip
         ) {
           ruleIndex = j;

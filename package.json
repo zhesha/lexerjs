@@ -1,10 +1,13 @@
 {
-  "name": "tpl",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "lexerjs",
+  "version": "0.1.0",
+  "description": "Lexical analyzer",
+  "keywords": ["lexer", "flex", "Lexical analyzer"],
+  "main": "lexerjs.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest --collectCoverage",
+    "prett": "prettier --write lexerjs.js"
   },
   "author": "",
   "license": "ISC",
