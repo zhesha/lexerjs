@@ -1,6 +1,6 @@
 {
   "name": "js-lexer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Lexical analyzer",
   "keywords": ["lexer", "flex", "Lexical analyzer"],
   "main": "lexerjs.js",

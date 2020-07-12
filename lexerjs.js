@@ -1,5 +1,5 @@
 (function(exports) {
-  var lexerResults = {
+  const lexerResults = {
     none: 0,
     start: 1,
     exact: 2,
@@ -14,35 +14,35 @@
   }
 
   function tokenize(str, rules) {
-    var prevRuleIndex, ruleIndex, type;
-    var tokens = [];
-    var char = 0;
-    var line = 0;
-    var col = char + 1;
-    var testerStartIndex = 0;
-    var tested = str[char];
-    if (tested == "\n") {
+    let prevRuleIndex = null, ruleIndex, type;
+    const tokens = [];
+    let char = 0;
+    let line = 0;
+    let col = char + 1;
+    let testerStartIndex = 0;
+    let tested = str[char];
+    if (tested === "\n") {
       line = 1;
       col = 0;
     }
 
     while (char < str.length) {
       ruleIndex = null;
-      for (var j = testerStartIndex; j < rules.length; j++) {
-        var result = rules[j].tester(tested);
-        if (result == lexerResults.none) {
+      let result;
+      for (let j = testerStartIndex; j < rules.length; j++) {
+        result = rules[j].tester(tested);
+        if (result === lexerResults.none) {
           if (ruleIndex == null) {
             testerStartIndex++;
           }
-          continue;
-        } else if (result == lexerResults.start) {
+
+        } else if (result === lexerResults.start) {
           ruleIndex = j;
           type = result;
-          continue;
         } else if (
-          result == lexerResults.exact ||
-          result == lexerResults.possible ||
-          result == lexerResults.skip
+          result === lexerResults.exact ||
+          result === lexerResults.possible ||
+          result === lexerResults.skip
         ) {
           ruleIndex = j;
           type = result;
@@ -61,8 +61,8 @@
       }
 
       if (ruleIndex !== null) {
-        if (type != lexerResults.skip && char == str.length - 1) {
-          if (result != lexerResults.start) {
+        if (type !== lexerResults.skip && char === str.length - 1) {
+          if (result !== lexerResults.start) {
             tokens.push({ type: rules[ruleIndex].name, value: tested });
           } else {
             throw error(errorMessage());
@@ -71,15 +71,15 @@
         prevRuleIndex = ruleIndex;
         char++;
         tested += str[char];
-        if (str[char] == "\n") {
+        if (str[char] === "\n") {
           line++;
           col = 0;
         }
       } else {
-        if (prevRuleIndex === null || result == lexerResults.start) {
+        if (prevRuleIndex === null || type === lexerResults.start) {
           throw error(errorMessage());
         }
-        if (type != lexerResults.skip) {
+        if (type !== lexerResults.skip) {
           tokens.push({
             type: rules[prevRuleIndex].name,
             value: tested.slice(0, -1)

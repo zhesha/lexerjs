@@ -219,6 +219,36 @@ test("throws if tester returns wrong result", function() {
   }).toThrow();
 });
 
+test("throws if token only starts", function() {
+  var rules = [
+    {
+      name: 'number',
+      tester: function (tested) {
+        if(/^\d+\.$/.test(tested)) {
+          return lexerResults.start;
+        }
+        if(/^\d+(\.\d+)?$/.test(tested)) {
+          return lexerResults.possible;
+        }
+        return lexerResults.none;
+      }
+    },
+    {
+      name: 'terminator',
+      tester: function (tested) {
+        if(tested === ';') {
+          return lexerResults.exact;
+        }
+        return lexerResults.none;
+      }
+    }
+  ];
+
+  expect(() => {
+    var tokens = lexer("1.;", rules);
+  }).toThrow();
+});
+
 var jsonRules = [
   {
     name: "Whitespace",
